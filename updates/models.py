@@ -10,7 +10,7 @@ def upload_update_image(instance, filename):
 
 class UpdateQuerySet(models.QuerySet):
     def serialize(self):
-        list_values = list(self.values("user", "content", "image"))
+        list_values = list(self.values("user", "content", "image", "id"))
         return json.dumps(list_values)
 
 
@@ -40,7 +40,8 @@ class Update(models.Model):
         data = {
             "content": self.content,
             "user": self.user.id,
-            "image": image
+            "image": image,
+            "id": self.id
         }
         data = json.dumps(data)
         return data
