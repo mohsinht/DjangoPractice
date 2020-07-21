@@ -2,7 +2,8 @@
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.views.generic import View
-
+from django.core.serializers import serialize
+import json
 from cfeapi.mixins import JsonResponseMixin
 from .models import Update
 
@@ -31,3 +32,29 @@ class JsonCBV2(JsonResponseMixin, View):
             "content": "Some New Content"
         }
         return self.render_to_json_response(data)
+
+
+class SerializedDetailView(View):
+    def get(self, request, *arg, **kwargs):
+        obj = Update.objects.get(id=1)
+        data = {
+            "user": object.user.username,
+            "content": object.content
+        }
+
+        json_data = json.dumps(data)
+        return self.render_to_json_response(data)
+
+
+class SerializedListView(View):
+    def get(self, request, *arg, **kwargs):
+        qs = Update.objects.all()
+        data = serialize("json", qs, fields=('user', 'content'))
+        print(data)
+        # data = {
+        #     "user": object.user.username,
+        #     "content": object.content
+        # }
+
+        json_data = data
+        return HttpResponse(json_data, content_type="application/json")
