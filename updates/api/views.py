@@ -11,7 +11,6 @@ class UpdateModelDetailAPIView(View):
             json_data = obj.serialize()
         except:
             json_data = {"no_update": True}
-
         return HttpResponse(json_data, content_type="application/json")
 
     # Create:
