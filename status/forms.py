@@ -13,6 +13,13 @@ class StatusForm(forms.ModelForm):
             'image'
         ]
 
+    # form supports clean_<field_name> to specify validation of a field
+    def clean_content(self, *args, **kwargs):
+        content = self.cleaned_data.get('content')
+        if len(content) > 240:
+            raise forms.ValidationError('Content is too long')
+        return content
+
     def clean(self, *args, **kwargs):
         data = self.cleaned_data
         content = data.get('content', None)
@@ -20,8 +27,6 @@ class StatusForm(forms.ModelForm):
             content = None
 
         image = data.get('image', None)
-        print(content)
-        print(image)
         if content is None and image is None:
             raise forms.ValidationError('Content or image is required.')
 
