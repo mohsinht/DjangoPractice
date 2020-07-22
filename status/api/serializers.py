@@ -8,7 +8,7 @@ A serializer does 2 basic things:
 '''
 
 
-# Serializers turn Native Python data into JSON/(or parseable) format
+# Serializers turn Models or Query Sets into Native Python data that can be converted into JSON/(or parseable) format
 class StatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Status
