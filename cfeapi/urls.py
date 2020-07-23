@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # api/updates -> list api/updates/1 -> details
     url(r'^api/updates/', include('updates.api.urls')),
+    url(r'^api/status/', include('status.api.urls')),
     # url(r'^json/cbv', JsonCBV.as_view()),
     # url(r'^json/cbv2', JsonCBV2.as_view()),
     # url(r'^json/serialized/list', SerializedListView.as_view()),
