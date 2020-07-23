@@ -1,6 +1,8 @@
 from django.conf.urls import url
+from django.urls import path, re_path
 
-from .views import StatusAPIView
+from .views import (StatusAPIView, StatusCreateAPIView,
+                    StatusDetailAPIView, StatusUpdateAPIView, StatusDeleteAPIView)
 
 '''
 Endpoints for the Status API.
@@ -24,8 +26,10 @@ And even better:
 
 urlpatterns = [
     url(r'^$', StatusAPIView.as_view()),
-    # url(r'^create/$', StatusCreateAPIView.as_view()),
-    # url(r'^(?<id>.*)/$', StatusDetailAPIView.as_view()),
-    # url(r'^(?<id>.*)/update/$', StatusUpdateAPIView.as_view()),
-    # url(r'^(?<id>.*)/delete/$', StatusDeleteAPIView.as_view()),
+    url(r'^create/$', StatusCreateAPIView.as_view()),
+    url(r'^(?P<id>\d+)/$', StatusDetailAPIView.as_view()),
+    # re_path(r'^articles/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', views.month_archive),
+    url(r'^(?P<pk>\d+)/update/$', StatusUpdateAPIView.as_view()),
+    #url(r'^(?P<pk>.*)/update/$', StatusUpdateAPIView.as_view()),
+    url(r'^(?P<pk>\d+)/delete/$', StatusDeleteAPIView.as_view()),
 ]
