@@ -18,6 +18,7 @@ class StatusSerializer(serializers.ModelSerializer):
             'content',
             'image'
         ]
+        read_only_fields = ['user']
 
     # validata_<field_name>()
     def validate_content(self, value):
