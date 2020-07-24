@@ -129,5 +129,5 @@ STATIC_URL = '/static/'
 
 # '/f/Tintash/Week 2/DjangoRest/restapi/src/'
 MEDIA_ROOT = os.path.join(os.path.dirname(
-    BASE_DIR), 'static-server', 'media_root'),
+    BASE_DIR), 'static-server', 'media_root')
 MEDIA_URL = '/media/'
